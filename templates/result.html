@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 30px;
+            color: #007bff;
+        }
+        .result {
+            font-size: 28px;
+            font-weight: bold;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .normal { color: green; }
+        .mildly-dry { color: orange; }
+        .moderately-dry { color: red; }
+        .predictions {
+            margin-top: 50px;
+        }
+        .predictions h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #007bff;
+        }
+        .tests {
+            display: flex;
+            justify-content: space-between;
+        }
+        .test {
+            width: calc(45% - 20px);
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .test h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+        .test p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        .separator {
+            margin-top: 30px;
+            border-top: 2px solid #007bff;
+            text-align: center;
+        }
+        .note {
+            margin-top: 20px;
+            font-size: 16px;
+        }
+        .note table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .note th,
+        .note td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+        .note th {
+            background-color: #007bff;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Result</h1>
+        
+        <!-- {% if predictions['Schimers2Lefteye'] == 'Normal' %}
+            <div class="result normal">{{ predictions['Schimers2righteye'] }}</div>
+        {% elif predictions['Schimers2Lefteye'] == 'Mildly Dry Eyes' %}
+            {% if predictions['Schimers2Righteye'] == 'Normal' %}
+                <div class="result mildly-dry">{{ predictions['Schimers2Lefteye'] }}</div>
+            {% else %}
+                <div class="result mildly-dry">{{ predictions['Schimers2righteye'] }}</div>
+            {% endif %}
+        {% elif predictions['Schimers2Lefteye'] == 'Moderately Dry Eyes' %}
+            {% if predictions['Schimers2Righteye'] == 'Severe Dry Eyes' %}
+                <div class="result moderately-dry">{{ predictions['Schimers2Righteye'] }}</div>
+            {% else %}
+                <div class="result moderately-dry">{{ predictions['Schimers2Lefteye'] }}</div>
+            {% endif %}
+        {% endif %} -->
+        {% if 'Severe Dry Eyes' in predictions.values() %}
+        <div class="result moderately-dry">{{ 'Severe Dry Eyes' }}</div>
+        {% elif 'Moderately Dry Eyes' in  predictions.values() %}
+        <div class="result moderately-dry">{{ 'Moderately Dry Eyes' }}</div>
+        {% elif 'Mildly Dry Eyes' in  predictions.values() %}
+        <div class="result mildly-dry">{{ 'Mildly Dry Eyes' }}</div>
+        {% else %}
+        <div class="result normal">{{ 'Normal' }}</div>
+        {% endif %}
+
+
+        <div class="predictions">
+            <h2>Predictions:</h2>
+            <div class="tests">
+                <div class="test">
+                    <h3>Schimers Test 1</h3>
+                    {% for key, value in predictions.items() %}
+                        {% if loop.index <= 2 %}
+                            <p>{{ key }} : {{ value }}</p>
+                        {% endif %}
+                    {% endfor %}
+                    <div class="separator"></div>
+                    <div class="note">
+                        <table>
+                            <tr>
+                                <th>Schimers Value</th>
+                                <th>Outcome</th>
+                            </tr>
+                            <tr>
+                                <td>Greater than 15</td>
+                                <td>Normal</td>
+                            </tr>
+                            <tr>
+                                <td>10 - 15</td>
+                                <td>Mildly Dry Eyes</td>
+                            </tr>
+                            <tr>
+                                <td>5 - 10</td>
+                                <td>Moderate Dry Eyes</td>
+                            </tr>
+                            <tr>
+                                <td>Less than 5</td>
+                                <td>Severe Dry Eyes</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="test">
+                    <h3>Schimers Test 2</h3>
+                    {% for key, value in predictions.items() %}
+                        {% if loop.index > 2 %}
+                            <p>{{ key }} : {{ value }}</p>
+                        {% endif %}
+                    {% endfor %}
+                    <div class="separator"></div>
+                    <div class="note">
+                        <table>
+                            <tr>
+                                <th>Schimers Value</th>
+                                <th>Outcome</th>
+                            </tr>
+                            <tr>
+                                <td>Greater than 10</td>
+                                <td>Normal</td>
+                            </tr>
+                            <tr>
+                                <td>6 - 10</td>
+                                <td>Mildly Dry Eyes</td>
+                            </tr>
+                            <tr>
+                                <td>3 - 6</td>
+                                <td>Moderate Dry Eyes</td>
+                            </tr>
+                            <tr>
+                                <td>Less than 3</td>
+                                <td>Severe Dry Eyes</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+       
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,447 @@
+<html lang="en">
+<head>
+<title>Schirmer's based on Digital Screen Usage</title>
+</head>
+<style>
+           .center {
+            display: flex;
+            justify-content: center;
+        }
+ 
+        .box {
+            background-color: #faf7f7; 
+            padding: 10px; 
+            margin-bottom: 10px; 
+        }
+h1 {
+            font-size: 2em; 
+            font-weight: bold; 
+            color: #000000; 
+            text-align: center;
+            font-family: 'Roboto', sans-serif;
+            font-style: italic;
+        }
+        
+   
+body {
+    font-family: Arial, sans-serif;
+    background-color: #b6def7;
+    padding: 20px;
+}
+
+
+
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+}
+
+
+input[type="text"],
+input[type="radio"],
+input[type="checkbox"] {
+    margin-bottom: 10px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+label {
+    margin-left: 5px;
+}
+
+
+input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+
+.center {
+    display: flex;
+    justify-content: center;
+}
+</style>
+<body>
+    
+<form action="{{ url_for('predict')}}" method="POST">
+    <h1>Predicting Schirmer's based on Digital Screen Usage</h1>
+    <div class="box">
+    Name
+    <br>
+    <br>
+    <input type="text" id="name" name="name" placeholder="Enter your name" required>
+    <br>
+    </div>
+    <br>
+    
+    Age
+    <br>
+    <br>
+    <input type="text" id="age" name="age" placeholder="Enter your age" required>
+    <br>
+    <br>
+    <div class="box">
+        Sex
+        <br>
+        <br>
+        <input type="radio" id="male" name="sex" value="1"  required>
+        <label for="male">Male</label>
+        
+        <input type="radio" id="female" name="sex" value="2"  required>
+        <label for="female">Female</label>
+        <br>
+    </div>
+    <br>
+        
+        Do you wear Prescription glasses or contact lenses?
+        <br>
+        <br>
+        <input type="radio" id="glasses" name="eyewear" value="1"  required>
+        <label for="glasses">Glasses only</label>
+        <br>
+        <input type="radio" id="contacts" name="eyewear" value="2"  required>
+        <label for="contacts">Contact lenses only</label>
+        <br>
+        <input type="radio" id="none" name="eyewear" value="3" required>
+        <label for="none">None</label>
+        <br>
+        <input type="radio" id="both" name="eyewear" value="4"  required>
+        <label for="both">Both, at one or other time</label>
+        <br>
+        <input type="radio" id="na" name="eyewear" value="5"  required>
+        <label for="na">Not applicable</label>
+        <br>
+        <br>
+        <div class="box">
+        Duration of usage of spects
+        <br>
+        <br>
+        <input type="radio" id="5" name="usageDuration" value="1"  required>
+        <label for="5">0-5 years</label>
+        
+        <input type="radio" id="10" name="usageDuration" value="2"  required>
+        <label for="10">5-10 years</label>
+        
+        <input type="radio" id="10more" name="usageDuration" value="3"  required>
+        <label for="10more">More than 10 years</label>
+        
+        <br>
+        </div>
+        Are you using any online platforms to attend any webinars or classes?
+        <br>
+        <br>
+        <input type="radio" id="yes" name="onlinePlatforms" value="1"  required>
+        <label for="yes">Yes</label>
+        
+        <input type="radio" id="no" name="onlinePlatforms" value="2"  required>
+        <label for="no_">No</label>
+        <br>
+        <br>
+        <div class="box">
+        Nature of computer usage in a day
+        <br>
+        <br>
+        <input type="radio" id="continuous" name="computerUsage" value="1" required>
+        <label for="continuous">Continuous</label>
+        
+        <input type="radio" id="interrupted" name="computerUsage" value="2" required>
+        <label for="interrupted">Interrupted</label>
+        <br>
+        </div>
+        <br>
+
+        What will be your Normal Screen Illumination while working in computer?
+        <br>
+        <br>
+        <input type="radio" id="25" name="screenIllumination" value="1"  required>
+        <label for="25">25%</label>
+        
+        <input type="radio" id="25-30" name="screenIllumination" value="2"  required>
+        <label for="25-30">25-30%</label>
+        
+        <input type="radio" id="50" name="screenIllumination" value="3"  required>
+        <label for="50">50%</label>
+        <br>
+        <br>
+   
+        <div class="box">
+        How many Years you have been Working with Computer on daily basis?
+        <br>
+        <br>
+        <input type="radio" id="5" name="yearsWorking" value="1"  required>
+        <label for="5">lesser than 5 years</label>
+        
+        <input type="radio" id="5-10" name="yearsWorking" value="2"  required>
+        <label for="5-10">between 5-10 years</label>
+        
+        <input type="radio" id="10" name="yearsWorking" value="3"  required>
+        <label for="10">greater than 10 years</label>
+        <br>
+        </div>
+        <br>
+
+        How many hours Spent for Online Classes (Curricular purpose) in a day?
+        <br>
+        <br>
+        <input type="radio" id="hours_24" name="hoursOnlineClasses" value="1"  required>
+        <label for="hours_24">2-4 hours</label>
+        <br>
+        <input type="radio" id="hours_46" name="hoursOnlineClasses" value="2"  required>
+        <label for="hours_46">4-6 hours</label>
+        <br>
+        <input type="radio" id="hours_68" name="hoursOnlineClasses" value="3"  required>
+        <label for="hours_68">6-8 hours</label>
+        <br>
+        <input type="radio" id="hours_810" name="hoursOnlineClasses" value="4" required>
+        <label for="hours_810">8-10 hours</label>
+        <br>
+        <br>
+
+        <div class="box">
+        How many hours Spent for reasons other than online classes (Non-Curricular purpose) in a day?
+        <br>
+        <br>
+        <input type="radio" id="screenTime_lessthan2" name="screenTimeNonCurricular" value="1"  required>
+        <label for="screenTime_lessthan2">Less than 2 hours</label>
+        <br>
+        <input type="radio" id="screenTime_24" name="screenTimeNonCurricular" value="2"  required>
+        <label for="screenTime_24">2-4 hours</label>
+        <br>
+        <input type="radio" id="screenTime_46" name="screenTimeNonCurricular" value="3"  required>
+        <label for="screenTime_46">4-6 hours</label>
+        <br>
+	    <input type="radio" id="screenTime_68" name="screenTimeNonCurricular" value="4"  required>
+        <label for="screenTime_46">6-8 hours</label>
+        <br>
+        </div>
+        <br>
+        
+        What gadget do you use most of the times for above said purposes?
+        <br>
+        <br>
+        <input type="radio" id="gadget_mobile" name="mostUsedGadget" value="1"  required>
+        <label for="gadget_mobile">Mobile</label>
+        
+        <input type="radio" id="gadget_laptop" name="mostUsedGadget" value="2"  required>
+        <label for="gadget_laptop">Laptop</label>
+        
+        <input type="radio" id="gadget_tablet" name="mostUsedGadget" value="3"  required>
+        <label for="gadget_tablet">Tablet</label>
+        <br>
+        <br>
+
+        <div class="box">
+        How do you use the gadget at least half of the times (level of gadget with respect to eyes)?
+        <br>
+        <br>
+        <input type="radio" id="gadget_above_eyes" name="gadgetLevel" value="1"  required>
+        <label for="gadget_above_eyes">Above the level of eyes (eyes have to look up)</label>
+        <br>
+        <input type="radio" id="gadget_at_eyes" name="gadgetLevel" value="2"  required>
+        <label for="gadget_at_eyes">At the level of eyes</label>
+        <br>
+        </div>
+        <br>
+
+        What distance do you keep between your eyes & gadget more than half of the times?
+        <br>
+        <br>
+        <input type="radio" id="distance_less25cm" name="distanceEyesGadget" value="1"  required>
+        <label for="distance_less25cm">Less than 25 cm</label>
+        <br>
+        <input type="radio" id="distance_2540cm" name="distanceEyesGadget" value="2"  required>
+        <label for="distance_2540cm">25-40 cm</label>
+        <br>
+        <input type="radio" id="distance_more40cm" name="distanceEyesGadget" value="3"  required>
+        <label for="distance_more40cm">More than 40 cm</label>
+        <br>
+        <br>
+
+        <div class="box">
+        What is the average night time (after sunset) usage (in hours) of the gadgets per day?
+        <br>
+        <br>
+        <input type="radio" id="night_less1" name="nightTimeUsage" value="1"  required>
+        <label for="night_less1">Less than 1 hour</label>
+        <br>
+        <input type="radio" id="night_12" name="nightTimeUsage" value="2"  required>
+        <label for="night_12">1-2 hours</label>
+        <br>
+        <input type="radio" id="night_24" name="nightTimeUsage" value="3"  required>
+        <label for="night_24">2-4 hours</label>
+        <br>
+        <input type="radio" id="night_more4" name="nightTimeUsage" value="4"  required>
+        <label for="night_more4">More than 4 hours</label>
+        <br>
+        </div>
+        <br>
+
+        Do you keep on reminding yourself to blink during digital screen usage?
+        <br>
+        <br>
+        <input type="radio" id="blink_yes" name="remindToBlink" value="1"  required>
+        <label for="blink_yes">Yes</label>
+        
+        <input type="radio" id="blink_no" name="remindToBlink" value="2"  required>
+        <label for="blink_no">No</label>
+        <br>
+        <br>
+
+        <div class="box">
+        After using screen, do you feel difficulty focusing from one distance to another more than half of the times?
+        <br>
+        <br>
+        <input type="radio" id="difficulty_yes" name="difficultyFocusing" value="1"  required>
+        <label for="difficulty_yes">Yes</label>
+        
+        <input type="radio" id="difficulty_no" name="difficultyFocusing" value="2"  required>
+        <label for="difficulty_no">No</label>
+        
+        <input type="radio" id="difficulty_maybe" name="difficultyFocusing" value="3"  required>
+        <label for="difficulty_maybe">Maybe</label>
+        <br>
+        </div>
+        <br>
+    
+        How frequently do you experience the above complaints?
+        <br>
+        <br>
+        <input type="radio" id="complaints_never" name="complaintsFrequency" value="0"  required>
+        <label for="complaints_never">Never</label>
+        <br>
+        <input type="radio" id="complaints_15" name="complaintsFrequency" value="1"  required>
+        <label for="complaints_15">less than 5 times a week</label>
+        <br>
+        <input type="radio" id="complaints_25" name="complaintsFrequency" value="2"  required>
+        <label for="complaints_25">more than 5 times a week</label>
+        <br>
+        <br>
+
+        <div class="box">
+        Severity of ocular complaints
+        <br>
+        <br>
+        <input type="radio" id="severity_never" name="ocularSeverity" value="0"  required>
+        <label for="severity_never">Never</label>
+        <br>
+        <input type="radio" id="severity_disturbs" name="ocularSeverity" value="1"  required>
+        <label for="severity_disturbs">Disturbs work</label>
+        <br>
+        <input type="radio" id="severity_severe" name="ocularSeverity" value="2">
+        <label for="severity_severe">Severe enough to stop work and take rest</label>
+        <br>
+        </div>
+        <br>
+
+        Which out of the following ocular symptoms do you observe lately (after start of online classes) at least half of the times? 
+        <br>
+        <br>
+        (MORE THAN ONE RESPONSES CAN BE MARKED)
+        <br>
+        <br>
+        <input type="checkbox" id="symptom_heaviness" name="ocularSymptoms" value="1" >
+        <label for="symptom_heaviness">Heaviness/tired eyes</label>
+        <br>
+        <input type="checkbox" id="symptom_redness" name="ocularSymptoms" value="2"  >
+        <label for="symptom_redness">Redness in eyes</label>
+        <br>
+        <input type="checkbox" id="symptom_watering" name="ocularSymptoms" value="3"  >
+        <label for="symptom_watering">Watering from eyes</label>
+        <br>
+        <input type="checkbox" id="symptom_grittiness" name="ocularSymptoms" value="4" >
+        <label for="symptom_grittiness">Feeling of grittiness in eyes</label>
+        <br>
+        <input type="checkbox" id="symptom_itchy" name="ocularSymptoms" value="5"  >
+        <label for="symptom_itchy">Itchy eyes (eye rubbing)</label>
+        <br>
+        <input type="checkbox" id="symptom_blurring" name="ocularSymptoms" value="6" >
+        <label for="symptom_blurring">Transient blurring of vision</label>
+        <br>
+        <input type="checkbox" id="symptom_light_sensitivity" name="ocularSymptoms" value="7"  >
+        <label for="symptom_light_sensitivity">Sensitivity to bright light</label>
+        <br>
+        <input type="checkbox" id="symptom_lens_discomfort" name="ocularSymptoms" value="8" >
+        <label for="symptom_lens_discomfort">Contact lens discomfort</label>
+        <br>
+        <input type="checkbox" id="symptom_headache" name="ocularSymptoms" value="9"  >
+        <label for="symptom_headache">Headache</label>
+        <br>
+        <input type="checkbox" id="symptom_other" name="ocularSymptoms" value="0"  >
+        <label for="symptom_other">Other</label>
+        <br>
+        <br>
+
+        <div class="box">
+        Are you observing any of these symptoms at least half of the times lately? 
+        <br>
+        <br>
+        (MORE THAN ONE RESPONSES CAN BE MARKED)
+        <br>
+        <br>
+        <input type="checkbox" id="observation_concentrating" name="symptomsObservation" value="1"  >
+        <label for="observation_concentrating">Difficulty concentrating</label>
+        <br>
+        <input type="checkbox" id="observation_anxiety" name="symptomsObservation" value="2"  >
+        <label for="observation_anxiety">Anxiety</label>
+        <br>
+        <input type="checkbox" id="observation_sleep" name="symptomsObservation" value="3"  >
+        <label for="observation_sleep">Sleep disturbances</label>
+        <br>
+        <input type="checkbox" id="observation_dizziness" name="symptomsObservation" value="4" >
+        <label for="observation_dizziness">Dizziness</label>
+        <br>
+        <input type="checkbox" id="observation_neck_pain" name="symptomsObservation" value="5"  >
+        <label for="observation_neck_pain">Pain in neck</label>
+        <br>
+        </div>
+        <br>
+
+        How frequently do you experience the above complaints?
+        <br>
+        <br>
+        <input type="radio" id="complaints_never" name="complaintFrequency" value="1"  required>
+        <label for="complaints_never">Never</label>
+        <br>
+        <input type="radio" id="complaints_5times" name="complaintFrequency" value="2"  required>
+        <label for="complaints_5times">lesser than 5 times a week</label>
+        <br>
+        <input type="radio" id="complaints_5times" name="complaintFrequency" value="3"  required>
+        <label for="complaints_5times">gretaer than 5 times a week</label>
+        <br>  
+        <br>
+
+        <div class="box">
+        How often do your eyes feel dry?
+        <br>
+        <br>
+        <input type="radio" id="dry_often" name="dryFrequency" value="1"  required>
+        <label for="dry_often">Often</label>
+        
+        <input type="radio" id="dry_sometimes" name="dryFrequency" value="2"  required>
+        <label for="dry_sometimes">Sometimes</label>
+        
+        <input type="radio" id="dry_never" name="dryFrequency" value="3"  required>
+        <label for="dry_never">Never</label>
+        <br>
+        </div>
+        <br>
+        <br>
+        <br>
+        <div class="center">
+    <input type="submit" value="Submit">
+    </div>
+</form>
+</div>
+</body>
+</html>
